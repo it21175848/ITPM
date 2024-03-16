@@ -5,6 +5,7 @@ import { productData } from "../../dummyData";
 import { Publish } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 
+//asard
 export default function Product() {
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
