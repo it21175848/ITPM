@@ -50,7 +50,13 @@ export default function Sidebar() {
             <Link to="/createshop" className="link">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
-                Shops
+                Shops Create
+              </li>
+            </Link>
+            <Link to="/shoplist" className="link">
+              <li className="sidebarListItem">
+                <Storefront className="sidebarIcon" />
+                Shops Lists
               </li>
             </Link>
             <Link to="/products" className="link">

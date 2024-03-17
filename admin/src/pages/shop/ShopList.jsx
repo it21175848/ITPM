@@ -26,14 +26,16 @@ export default function ShopList() {
       field: "shop",
       headerName: "Shop",
       width: 200,
+
       renderCell: (params) => {
         return (
           <div className="shopListItem">
-            <img className="shopListImg" src={params.row.img} alt="" />
-            {params.row.title}
+            <img className="shopListImg" src={params.row.image} alt="" />
+            {params.row.name}
           </div>
         );
       },
+  
     },
     { field: "location", headerName: "Location", width: 200 },
 
@@ -41,6 +43,11 @@ export default function ShopList() {
       field: "contact",
       headerName: "Contact",
       width: 160,
+    },
+    {
+      field: "category",
+      headerName: "Category",
+      width: 150,
     },
     {
       field: "action",

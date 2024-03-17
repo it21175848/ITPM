@@ -57,6 +57,9 @@ function App() {
                   <NewProduct />
                 </Route>
                 <Route path="/createshop">
+                  <CreateShop />
+                </Route>
+                <Route path="/shoplist">
                   <ShopList />
                 </Route>
               </div>
