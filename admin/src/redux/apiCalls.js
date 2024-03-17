@@ -90,7 +90,7 @@ export const getShops = async (dispatch) => {
 export const deleteShop = async (dispatch, shopId) => {
   dispatch(deleteShopStart());
   try {
-    //await userRequest.delete(`/shops/${shopId}`);
+    await userRequest.delete(`/shops/${shopId}`);
     dispatch(deleteShopSuccess(shopId));
   } catch (error) {
     dispatch(deleteShopFailure());

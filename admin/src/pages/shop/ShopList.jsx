@@ -1,4 +1,4 @@
-import "./productList.css";
+import "./shopList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
@@ -28,8 +28,8 @@ export default function ShopList() {
       width: 200,
       renderCell: (params) => {
         return (
-          <div className="productListItem">
-            <img className="productListImg" src={params.row.img} alt="" />
+          <div className="shopListItem">
+            <img className="shopListImg" src={params.row.img} alt="" />
             {params.row.title}
           </div>
         );
@@ -50,10 +50,10 @@ export default function ShopList() {
         return (
           <>
             <Link to={"/shop/" + params.row._id}>
-              <button className="productListEdit">Edit</button>
+              <button className="shopListEdit">Edit</button>
             </Link>
             <DeleteOutline
-              className="productListDelete"
+              className="shopListDelete"
               onClick={() => handleDelete(params.row._id)}
             />
           </>
@@ -63,7 +63,7 @@ export default function ShopList() {
   ];
 
   return (
-    <div className="productList">
+    <div className="shopList">
       <DataGrid
         rows={shops}
         disableSelectionOnClick
