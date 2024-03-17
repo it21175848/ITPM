@@ -1,4 +1,7 @@
+// Import necessary action creators from userRedux for user authentication
 import { loginStart, loginSuccess, loginFailure } from "./userRedux";
+
+//for Product redux slice
 import {
   getProductStart,
   getProductSuccess,
@@ -7,8 +10,21 @@ import {
   deleteProductSuccess,
   deleteProductFailure,
 } from "./productRedux";
+
+//for Shop redux slice
+import {
+  getShopStart,
+  getShopSuccess,
+  getShopFailure,
+  deleteShopStart,
+  deleteShopSuccess,
+  deleteShopFailure,
+} from "./shopRedux";
+
+// Import request methods for API calls
 import { publicRequest, userRequest } from "../requestMethods";
 
+// Login function for user authentication
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
   try {
@@ -18,6 +34,9 @@ export const login = async (dispatch, user) => {
     dispatch(loginFailure());
   }
 };
+
+// 1. Product CRUD operations
+
 export const getProducts = async (dispatch) => {
   dispatch(getProductStart());
   try {
@@ -53,5 +72,47 @@ export const addProduct = async (product, dispatch) => {
     dispatch(getProductSuccess(res.data));
   } catch (error) {
     dispatch(getProductFailure());
+  }
+};
+
+// 1. Shop CRUD operations
+export const getShops = async (dispatch) => {
+  dispatch(getShopStart());
+  try {
+    const response = await userRequest.get("/shops/find");
+    const { shops } = response.data;
+    dispatch(getShopSuccess(shops));
+  } catch (error) {
+    dispatch(getShopFailure());
+  }
+};
+
+export const deleteShop = async (dispatch, shopId) => {
+  dispatch(deleteShopStart());
+  try {
+    await userRequest.delete(`/shops/${shopId}`);
+    dispatch(deleteShopSuccess(shopId));
+  } catch (error) {
+    dispatch(deleteShopFailure());
+  }
+};
+
+export const updateShop = async (dispatch, shopId, shopData) => {
+  dispatch(getShopStart());
+  try {
+    const response = await userRequest.put(`/shops/${shopId}`, shopData);
+    dispatch(getShopSuccess(response.data));
+  } catch (error) {
+    dispatch(getShopFailure());
+  }
+};
+
+export const createShop = async (shopData, dispatch) => {
+  dispatch(getShopStart());
+  try {
+    const response = await userRequest.post("/shops", shopData);
+    dispatch(getShopSuccess(response.data));
+  } catch (error) {
+    dispatch(getShopFailure());
   }
 };
