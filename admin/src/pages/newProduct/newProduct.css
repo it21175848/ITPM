@@ -37,3 +37,27 @@
   font-weight: 600;
   cursor: pointer;
 }
+.newProductContainer {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.newProductContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.buttonContainer {
+  margin-bottom: 20px; /* Adjust the margin as needed */
+}
+
+/* newProduct.css */
+.formContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .inputRow {
+  display: flex;
+} */
