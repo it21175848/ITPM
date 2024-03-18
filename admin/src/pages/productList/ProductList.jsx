@@ -1,22 +1,39 @@
 import "./productList.css";
+import React, { useState, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProducts } from "../../redux/apiCalls";
+import { Button, TextField, MenuItem, Select, InputLabel } from "@material-ui/core";
+
+
 
 export default function ProductList() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedStock, setSelectedStock] = useState("");
   const products = useSelector((state) => state.product.products);
   const dispatch = useDispatch();
   
-
   useEffect(() => {
     getProducts(dispatch);
     console.log("products:", products);
   }, [dispatch]);
+  
   const handleDelete = (id) => {
     deleteProduct(dispatch, id);
+  };
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+
+  const handleStockChange = (event) => {
+    setSelectedStock(event.target.value);
   };
 
   const columns = [
@@ -63,6 +80,22 @@ export default function ProductList() {
 
   return (
     <div className="productList">
+      <div className="productListHeader">
+        <h2>Product List</h2>
+        <div className="productListHeaderRight">
+          <Link to="/NewProduct">
+            <Button 
+              variant="contained" 
+              color="primary" 
+              className="productButton" 
+              style={{  padding: "8px 70px" }}
+            >
+              Create
+            </Button>
+          </Link>
+        </div>
+      </div>
+      <br/>
       <DataGrid
         rows={products}
         disableSelectionOnClick
