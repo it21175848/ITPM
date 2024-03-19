@@ -82,7 +82,7 @@ const Login = () => {
   useEffect(() => {
     if (user) {
       navigate.push("/");
-    }
+    } 
   }, [user, navigate]);
   console.log("user success: ", user);
   return (
