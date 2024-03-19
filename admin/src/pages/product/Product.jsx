@@ -4,22 +4,23 @@ import Chart from "../../components/chart/Chart";
 import { productData } from "../../dummyData";
 import { Publish } from "@material-ui/icons";
 import { useSelector } from "react-redux";
+import { Button } from "@material-ui/core";
 
+//asard
 export default function Product() {
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
   const product = useSelector((state) =>
     state.product.products.find((p) => p._id === productId)
   );
-  console.log("product:", product.inStock);
   
   return (
     <div className="product">
       <div className="productTitleContainer">
         <h1 className="productTitle">Product</h1>
-        <Link to="/newproduct">
-          <button className="productAddButton">Create</button>
-        </Link>
+        {/* <Link to="/NewProduct">
+          <Button className="productAddButton">Create</Button>
+        </Link> */}
       </div>
       <div className="productTop">
         <div className="productTopLeft">
@@ -70,7 +71,7 @@ export default function Product() {
               </label>
               <input type="file" id="file" style={{ display: "none" }} />
             </div>
-            <button className="productButton">Update</button>
+            {/* <button className="productButton">Update</button> */}
           </div>
         </form>
       </div>
