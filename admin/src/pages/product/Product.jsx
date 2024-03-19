@@ -13,7 +13,7 @@ export default function Product() {
   const product = useSelector((state) =>
     state.product.products.find((p) => p._id === productId)
   );
- 
+  
   return (
     <div className="product">
       <div className="productTitleContainer">

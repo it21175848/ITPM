@@ -18,6 +18,8 @@ import Login from "./pages/login/Login";
 import CreateShop from "./pages/shop/CreateShop";
 import ShopList from "./pages/shop/ShopList";
 
+import UpdateShop from "./pages/shop/UpdateShop";
+
 import { useSelector } from "react-redux";
 function App() {
   const { isAdmin } = useSelector((state) => state.user);
@@ -57,7 +59,13 @@ function App() {
                   <NewProduct />
                 </Route>
                 <Route path="/createshop">
+                  <CreateShop />
+                </Route>
+                <Route path="/shoplist">
                   <ShopList />
+                </Route>
+                <Route path="/shop/:id">
+                  <UpdateShop />
                 </Route>
               </div>
             </>
