@@ -1,21 +1,18 @@
-import "./updateShop.css";
-import { Link, useLocation } from "react-router-dom";
-import Chart from "../../components/chart/Chart";
-import { Publish } from "@material-ui/icons";
-import "./product.css";
-import { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateShop } from "../../redux/apiCalls";
+import Chart from "../../components/chart/Chart";
+import { Publish } from "@material-ui/icons";
+import "./updateShop.css";
 
 export default function UpdateShop() {
-  const { id } = useParams(); // Extract shop ID from URL params
+  const { id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
   const shops = useSelector((state) => state.shop.shops);
   const [shopData, setShopData] = useState({});
-  
-  // Fetch shop details when component mounts
+
   useEffect(() => {
     const selectedShop = shops.find((shop) => shop._id === id);
     setShopData(selectedShop);
@@ -33,7 +30,7 @@ export default function UpdateShop() {
     e.preventDefault();
     try {
       await updateShop(dispatch, id, shopData);
-      history.push("/shoplist"); // Redirect to shop list after successful update
+      history.push("/shoplist");
     } catch (error) {
       console.error("Error updating shop:", error);
       // Handle error appropriately, e.g., show error message to user
@@ -66,7 +63,6 @@ export default function UpdateShop() {
               <span className="productInfoKey">Sales:</span>
               <span className="productInfoValue">5123</span>
             </div>
-
             <div className="productInfoItem">
               <span className="productInfoKey">Location:</span>
               <span className="productInfoValue">{shopData.location}</span>
@@ -77,61 +73,27 @@ export default function UpdateShop() {
       <div className="productBottom">
         <form className="productForm" onSubmit={handleSubmit}>
           <div className="productFormLeft">
-            <label>Shop Name</label>
-            <input type="text" id="name" name="name" placeholder={shopData.name} onChange={handleChange} value={shopData.name || ""}/>
-            <label>Shop Location</label>
-            <input type="text" id="location" name="location" placeholder={shopData.location} onChange={handleChange} value={shopData.location || ""}/>
-            <label>Product Name</label>
-            <input type="text" id="description" name="description" placeholder={shopData.description} onChange={handleChange} value={shopData.description || ""}/>
-            <label>Product Name</label>
-            <input type="text" id="contact" name="contact" placeholder={shopData.contact} onChange={handleChange} value={shopData.contact || ""}/>
-    
+            <label htmlFor="name">Shop Name</label>
+            <input type="text" id="name" name="name" placeholder="Shop Name" onChange={handleChange} value={shopData.name || ""}/>
+            <label htmlFor="location">Shop Location</label>
+            <input type="text" id="location" name="location" placeholder="Shop Location" onChange={handleChange} value={shopData.location || ""}/>
+            <label htmlFor="description">Description</label>
+            <input type="text" id="description" name="description" placeholder="Description" onChange={handleChange} value={shopData.description || ""}/>
+            <label htmlFor="contact">Contact</label>
+            <input type="text" id="contact" name="contact" placeholder="Contact" onChange={handleChange} value={shopData.contact || ""}/>
           </div>
-
-
           <div className="productFormRight">
             <div className="productUpload">
               <img src={shopData.image} alt="" className="productUploadImg" />
-              <label for="file">
+              <label htmlFor="file">
                 <Publish />
               </label>
               <input type="file" id="file" style={{ display: "none" }} />
             </div>
-            <button className="productButton">Update</button>
+            <button className="productButton" type="submit">Update</button>
           </div>
         </form>
       </div>
     </div>
   );
-
-  {/*}
-  return (
-    <div className="updateShop">
-      <h2>Update Shop</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="formGroup">
-          <label htmlFor="name">Shop Name:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={shopData.name || ""}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="formGroup">
-          <label htmlFor="description">Description:</label>
-          <textarea
-            id="description"
-            name="description"
-            value={shopData.description || ""}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit">Update Shop</button>
-      </form>
-    </div>
-  );*/}
 }

@@ -44,9 +44,14 @@ const shopSlice = createSlice({
         (shop) => shop._id === action.payload.id
       );
       if (updatedShopIndex !== -1) {
-        state.shops[updatedShopIndex] = action.payload.shop;
+        state.shops = [
+          ...state.shops.slice(0, updatedShopIndex),
+          action.payload.shop,
+          ...state.shops.slice(updatedShopIndex + 1),
+        ];
       }
     },
+
     updateShopFailure: (state) => {
       state.isFetching = false;
       state.error = true;

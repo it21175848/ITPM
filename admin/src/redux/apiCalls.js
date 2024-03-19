@@ -19,6 +19,9 @@ import {
   deleteShopStart,
   deleteShopSuccess,
   deleteShopFailure,
+  updateShopStart,
+  updateShopSuccess,
+  updateShopFailure,
 } from "./shopRedux";
 
 // Import request methods for API calls
@@ -98,12 +101,12 @@ export const deleteShop = async (dispatch, shopId) => {
 };
 
 export const updateShop = async (dispatch, shopId, shopData) => {
-  dispatch(getShopStart());
+  dispatch(updateShopStart()); // Dispatching updateShopStart instead of getShopStart
   try {
     const response = await userRequest.put(`/shops/${shopId}`, shopData);
-    dispatch(getShopSuccess(response.data));
+    dispatch(updateShopSuccess(response.data)); // Dispatching updateShopSuccess
   } catch (error) {
-    dispatch(getShopFailure());
+    dispatch(updateShopFailure()); // Dispatching updateShopFailure
   }
 };
 
