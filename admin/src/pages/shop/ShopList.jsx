@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteShop, getShops } from "../../redux/apiCalls";
+import { Button, TextField, MenuItem, Select, InputLabel } from "@material-ui/core";
+
 
 export default function ShopList() {
   const shops = useSelector((state) => state.shop.shops);
@@ -71,6 +73,24 @@ export default function ShopList() {
 
   return (
     <div className="shopList">
+
+      <div className="productListHeader">
+        <h2>Shops List</h2>
+        <div className="productListHeaderRight">
+          <Link to="/createshop">
+            <Button 
+              variant="contained" 
+              color="primary" 
+              className="productButton" 
+              style={{  padding: "8px 70px" }}
+            >
+              Create
+            </Button>
+          </Link>
+        </div>
+      </div>
+      <br/>
+
       <DataGrid
         rows={shops}
         disableSelectionOnClick

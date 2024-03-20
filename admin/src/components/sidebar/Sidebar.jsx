@@ -1,6 +1,9 @@
 import "./sidebar.css";
 import {
   LineStyle,
+  StoreMallDirectoryOutlined,
+  People,
+  MapOutlined,
   Timeline,
   TrendingUp,
   PermIdentity,
@@ -47,16 +50,22 @@ export default function Sidebar() {
                 Users
               </li>
             </Link>
-            <Link to="/createshop" className="link">
+            <Link to="/shoplist" className="link">
               <li className="sidebarListItem">
-                <Storefront className="sidebarIcon" />
-                Shops Create
+                <StoreMallDirectoryOutlined className="sidebarIcon" />
+                Shops
               </li>
             </Link>
             <Link to="/shoplist" className="link">
               <li className="sidebarListItem">
-                <Storefront className="sidebarIcon" />
-                Shops Lists
+                <People className="sidebarIcon" />
+                Shops Owners
+              </li>
+            </Link>
+            <Link to="/shoplist" className="link">
+              <li className="sidebarListItem">
+                <MapOutlined className="sidebarIcon" />
+                Mall Maps
               </li>
             </Link>
             <Link to="/products" className="link">

@@ -6,7 +6,7 @@ import Chart from "../../components/chart/Chart";
 import { Publish } from "@material-ui/icons";
 import "./updateShop.css";
 
-export default function UpdateShop() {
+export default function OwnShopUpdate() {
   const { id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();

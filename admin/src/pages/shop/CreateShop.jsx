@@ -1,15 +1,20 @@
+
+
+
 import "./createShop.css"; // Import your CSS file for styling
 import { useState } from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebase";
 import { createShop } from "../../redux/apiCalls"; // Assuming you have an addShop function for the shop API call
 import { useDispatch } from "react-redux";
+import { useHistory } from 'react-router-dom'; // Import useHistory hook
 
 export default function CreateShop() {
   const [inputs, setInputs] = useState({});
   const [image, setImage] = useState(null);
   const [category, setCategory] = useState("");
   const dispatch = useDispatch();
+  const history = useHistory(); // Initialize useHistory
 
   const handleChange = (e) => {
     setInputs({
@@ -48,6 +53,7 @@ export default function CreateShop() {
           setInputs({});
           setImage(null);
           setCategory("");
+          history.push('/shoplist'); 
         });
       }
     );
@@ -74,6 +80,7 @@ export default function CreateShop() {
             onChange={handleChange}
           />
         </div>
+        {/* Other form fields */}
         <div className="addShopItem">
           <label>Description</label>
           <input
