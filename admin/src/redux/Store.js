@@ -3,6 +3,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./userRedux"; // Import user reducer
 import productReducer from "./productRedux"; // Import product reducer
 import shopReducer from "./shopRedux"; // Import shop reducer (changed import name)
+import ownerRedux from "./ownerRedux"; // Import shop reducer (changed import name)
 import {
   persistStore,
   persistReducer,
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   user: userReducer, // Add user reducer
   product: productReducer, // Add product reducer
   shop: shopReducer, // Add shop reducer (changed to shopReducer)
+  owner: ownerRedux, // Add shop reducer (changed to ownerRedux)
 });
 
 // Wrap the root reducer with state persistence configuration

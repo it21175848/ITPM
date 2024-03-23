@@ -24,13 +24,18 @@ const shopSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    contact: {
-      type: String,
-      required: true,
-    },
     openingHours: {
       type: String,
       required: true,
+    },
+    ownerName: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
+    phone: {
+      type: String,
     },
   },
   { timestamps: true }

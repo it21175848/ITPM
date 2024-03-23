@@ -17,8 +17,21 @@ import {
   Report,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/userRedux"; // Assuming you have an action to logout the user
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function Sidebar() {
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout()); // Dispatch the logout action to clear user authentication
+    // Redirect the user to the login page or homepage
+    window.location.href = "/login"; // Example: Redirect to login page
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -56,10 +69,11 @@ export default function Sidebar() {
                 Shops
               </li>
             </Link>
-            <Link to="/shoplist" className="link">
+            
+            <Link to="/ownerlist" className="link">
               <li className="sidebarListItem">
                 <People className="sidebarIcon" />
-                Shops Owners
+                Owners
               </li>
             </Link>
             <Link to="/shoplist" className="link">
@@ -74,10 +88,7 @@ export default function Sidebar() {
                 Products
               </li>
             </Link>
-            <li className="sidebarListItem">
-              <AttachMoney className="sidebarIcon" />
-              Transactions
-            </li>
+            
             <li className="sidebarListItem">
               <BarChart className="sidebarIcon" />
               Reports
@@ -118,7 +129,19 @@ export default function Sidebar() {
             </li>
           </ul>
         </div>
+
+        <Button 
+        style={{
+              marginTop: "20px",
+              width: "100%",
+              backgroundColor: "#f50057",
+              color: "white",
+              fontWeight: "bold",
+            }}
+        className="logoutButton" startIcon={<LogoutIcon />} onClick={handleLogout}>Logout</Button> {/* Apply CSS class to Button component */}
+
       </div>
     </div>
   );
 }
+

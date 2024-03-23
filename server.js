@@ -8,6 +8,7 @@ const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/order");
 const stripeRoute = require("./routes/stripe");
 const shopRoute = require("./routes/shop");
+const ownerRoute = require("./routes/owner");
 
 const app = express();
 connectToMongo();
@@ -23,6 +24,7 @@ app.use("/api/orders", orderRoute);
 app.use("/api/carts", cartRoute);
 app.use("/api/checkout", stripeRoute);
 app.use("/api/shops", shopRoute);
+app.use("/api/owners", ownerRoute);
 
 app.get("/", (req, res) => {
   res.send("Sup nigga?");

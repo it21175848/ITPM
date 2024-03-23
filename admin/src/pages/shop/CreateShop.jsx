@@ -1,6 +1,3 @@
-
-
-
 import "./createShop.css"; // Import your CSS file for styling
 import { useState } from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -31,8 +28,11 @@ export default function CreateShop() {
     e.preventDefault();
     const file = image;
 
-    if (!file) return;
-
+    if (!file || !inputs.name || !inputs.description || !category || !inputs.location || !inputs.phone || !inputs.openingHours) {
+      alert("Please fill in all required fields");
+      return;
+    }
+    
     const sotrageRef = ref(storage, `shops/${file.name}`);
     const uploadTask = uploadBytesResumable(sotrageRef, file);
 
@@ -124,7 +124,7 @@ export default function CreateShop() {
         <div className="addShopItem">
           <label>Contact Information</label>
           <input
-            name="contact"
+            name="phone"
             type="text"
             placeholder="Enter contact information"
             onChange={handleChange}

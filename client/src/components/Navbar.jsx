@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../redux/userRedux";
 import { useDispatch } from "react-redux";
+
 const Container = styled.div`
   height: 60px;
   ${mobile({ height: "50px" })}
@@ -27,7 +28,7 @@ const Left = styled.div`
 `;
 
 const Language = styled.span`
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
   ${mobile({ display: "none" })}
 `;
@@ -52,8 +53,10 @@ const Center = styled.div`
 
 const Logo = styled.h1`
   font-weight: bold;
-  ${mobile({ fontSize: "24px" })}
+  font-size: 24px;
+  ${mobile({ fontSize: "20px" })}
 `;
+
 const Right = styled.div`
   flex: 1;
   display: flex;
@@ -63,12 +66,17 @@ const Right = styled.div`
 `;
 
 const MenuItem = styled.div`
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
   margin-left: 25px;
-  ${mobile({ fontSize: "12px", marginLeft: "10px" })}
+  ${mobile({ fontSize: "14px", marginLeft: "10px" })}
   color: gray;
-  underline: none;
+  text-decoration: none; /* Remove default underline */
+  transition: color 0.3s, font-weight 0.3s; /* Smooth transition */
+  &:hover {
+    color: black; /* Change text color on hover */
+    font-weight: bold; /* Increase font weight on hover */
+  }
 `;
 
 const Navbar = () => {
@@ -88,9 +96,18 @@ const Navbar = () => {
             <Input placeholder="Search" />
             <Search style={{ color: "gray", fontSize: 16 }} />
           </SearchContainer>
+          <Link to="/">
+            <MenuItem>HOME</MenuItem>
+          </Link>
+          <Link to="/shoppage">
+            <MenuItem>SHOPS</MenuItem>
+          </Link>
+          <Link to="/">
+            <MenuItem>PRODUCTS</MenuItem>
+          </Link>
         </Left>
         <Center>
-          <Logo>SHERRY.</Logo>
+          <Logo>HELLO.</Logo>
         </Center>
         <Right>
           {!user ? (
@@ -103,9 +120,8 @@ const Navbar = () => {
               </Link>
             </>
           ) : (
-          <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
           )}
-
           <Link to={"/cart"}>
             <MenuItem>
               <Badge badgeContent={quantity} color="primary">
