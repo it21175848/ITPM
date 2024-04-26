@@ -57,7 +57,7 @@
 }
 
 .updateOwnerInfoItem {
-    width: 150px;
+    width: 300px;
     display: flex;
     justify-content: space-between;
 }

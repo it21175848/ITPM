@@ -57,7 +57,7 @@
 }
 
 .updateShopInfoItem {
-  width: 150px;
+  width: 300px;
   display: flex;
   justify-content: space-between;
 }
@@ -80,6 +80,7 @@
 .updateShopFormLeft {
   display: flex;
   flex-direction: column;
+  width: 200px;
 }
 
 .updateShopFormLeft > label {
@@ -92,11 +93,15 @@
   border: none;
   padding: 5px;
   border-bottom: 1px solid gray;
+  
 }
 
 .updateShopFormLeft > select {
   margin-bottom: 10px;
+  height: 28px;
+  
 }
+
 
 .updateShopUploadImg {
   width: 100px;
@@ -110,6 +115,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  width: 200px;
+}
+
+.updateShopFormRight > input {
+  margin-bottom: 10px;
+  border: none;
+  padding: 5px;
+  border-bottom: 1px solid gray;
 }
 
 .updateShopUpload {

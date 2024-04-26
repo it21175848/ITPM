@@ -1,7 +1,5 @@
-// Import necessary packages
 const mongoose = require("mongoose");
 
-// Define the shop schema
 const shopSchema = new mongoose.Schema(
   {
     name: {
@@ -22,9 +20,15 @@ const shopSchema = new mongoose.Schema(
     },
     location: {
       type: String,
-      required: true,
     },
     openingHours: {
+      type: String,
+    },
+    openingTime: {
+      type: String,
+      required: true,
+    },
+    closingTime: {
       type: String,
       required: true,
     },
@@ -34,12 +38,25 @@ const shopSchema = new mongoose.Schema(
     email: {
       type: String,
     },
-    phone: {
+    shopPhoneNumber: {
       type: String,
+    },
+    floorLevel: {
+      type: String,
+      enum: ["Basement", "1st Floor", "2nd Floor", "3rd Floor", "4th Floor"],
+    },
+    shopNumber: {
+      type: Number,
+      required: true,
+      min: 1,
+      max: 40,
+    },
+    ownerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Owner", // Reference to the Owner model
     },
   },
   { timestamps: true }
 );
 
-// Create and export the shop model
 module.exports = mongoose.model("Shop", shopSchema);

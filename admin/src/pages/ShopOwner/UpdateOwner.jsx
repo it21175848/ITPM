@@ -58,18 +58,14 @@ export default function UpdateOwner() {
       </div>
       <div className="updateOwnerTop">
         <div className="updateOwnerTopLeft">
-          {/* Chart component */}
           <Chart data={ownerData} dataKey="Sales" title="Sales Performance" />
         </div>
         <div className="updateOwnerTopRight">
           <div className="updateOwnerInfoTop">
-            {/* Owner image */}
             <img src={ownerData.image} alt="" className="updateOwnerInfoImg" />
-            {/* Owner name */}
             <span className="updateOwnerName">{ownerData.name}</span>
           </div>
           <div className="updateOwnerInfoBottom">
-            {/* Owner details */}
             <div className="updateOwnerInfoItem">
               <span className="updateOwnerInfoKey">Owner id:</span>
               <span className="updateOwnerInfoValue">{id}</span>

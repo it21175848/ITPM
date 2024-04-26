@@ -12,7 +12,6 @@ export default function CreateOwner() {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
-  const shops = useSelector((state) => state.shop.shops);
 
   const handleChange = (e) => {
     setInputs({
@@ -30,7 +29,7 @@ export default function CreateOwner() {
       return;
     }
 
-    if (!inputs.name || !inputs.email || !inputs.nic || !inputs.phone || !inputs.shopId) {
+    if (!inputs.name || !inputs.email || !inputs.nic || !inputs.phone ) {
       setError("Please fill in all fields");
       return;
     }
@@ -118,22 +117,7 @@ export default function CreateOwner() {
             required
           />
         </div>
-        <div className="addShopItem">
-          <label>Assign to Shop (ID):</label>
-          <select
-            name="shopId"
-            value={inputs.shopId || ""}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select Shop ID</option>
-            {shops.map((shop) => (
-              <option key={shop._id} value={shop._id}>
-                {shop._id}
-              </option>
-            ))}
-          </select>
-        </div>
+
         <button onClick={handleClick} className="addShopButton">
           Create Owner
         </button>

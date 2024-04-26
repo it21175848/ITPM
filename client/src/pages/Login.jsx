@@ -89,7 +89,7 @@ const Login = () => {
         <Title>SIGN IN</Title>
         <Form>
           <Input
-            placeholder="username"
+            placeholder="email address"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -107,7 +107,7 @@ const Login = () => {
             </p>
           )}
           <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
-          <Link>CREATE A NEW ACCOUNT</Link>
+          <Link href="/register">CREATE A NEW ACCOUNT</Link>
         </Form>
       </Wrapper>
     </Container>

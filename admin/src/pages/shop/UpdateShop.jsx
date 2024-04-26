@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateShop } from "../../redux/apiCalls";
 import Chart from "../../components/chart/Chart";
-import { Publish, Warning } from "@material-ui/icons";
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
+import { Publish } from "@material-ui/icons";
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from "@material-ui/core";
 import "./updateShop.css";
 
 export default function UpdateShop() {
   const { id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
+  const shops = useSelector((state) => state.shop.shops);
   const [shopData, setShopData] = useState({});
-  const [showConfirmation, setShowConfirmation] = useState(false); // State variable for showing confirmation popup
+  const [ownerData, setOwnerData] = useState({});
+  const [showConfirmation, setShowConfirmation] = useState(false); // State variable for showing confirmation dialog
 
   useEffect(() => {
-    // Fetch shop data based on the ID
-    // Replace the following line with your logic to fetch shop data
-    const selectedShop = { _id: id, name: "Shop Name", location: "Location", description: "Description", phone: "Phone", ownerName: "Owner Name", email: "Owner Email", image: "Image URL" };
+    const selectedShop = shops.find((shop) => shop._id === id);
     setShopData(selectedShop);
-  }, [id]);
+    // Assuming owner details are part of the shop data fetched from the server
+    setOwnerData(selectedShop.owner || {});
+  }, [id, shops]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,13 +33,18 @@ export default function UpdateShop() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setShowConfirmation(true); // Show confirmation popup
+    setShowConfirmation(true); // Show confirmation dialog
   };
 
   const confirmUpdate = async () => {
     try {
-      await updateShop(dispatch, id, shopData);
-      setShowConfirmation(false); // Hide confirmation popup
+      // Update the shop data with the owner details
+      const updatedShopData = {
+        ...shopData,
+        owner: ownerData
+      };
+      await updateShop(dispatch, id, updatedShopData);
+      setShowConfirmation(false); // Hide confirmation dialog
       history.push("/shoplist");
     } catch (error) {
       console.error("Error updating shop:", error);
@@ -46,7 +53,7 @@ export default function UpdateShop() {
   };
 
   const cancelUpdate = () => {
-    setShowConfirmation(false); // Hide confirmation popup
+    setShowConfirmation(false); // Hide confirmation dialog
   };
 
   return (
@@ -76,24 +83,52 @@ export default function UpdateShop() {
               <span className="updateShopInfoValue">5123</span>
             </div>
             <div className="updateShopInfoItem">
-              <span className="updateShopInfoKey">Location:</span>
-              <span className="updateShopInfoValue">{shopData.location}</span>
+              <span className="updateShopInfoKey">Floor Level:</span>
+              <span className="updateShopInfoValue">{shopData.floorLevel}</span>
+            </div>
+            <div className="updateShopInfoItem">
+              <span className="updateShopInfoKey">Shop Number:</span>
+              <span className="updateShopInfoValue">{shopData.shopNumber}</span>
+            </div>
+            <div className="updateShopInfoItem">
+              <span className="updateShopInfoKey">Onwer ID:</span>
+              <span className="updateShopInfoValue">{shopData.ownerId}</span>
             </div>
           </div>
         </div>
       </div>
+      
       <div className="updateShopBottom">
         <form className="updateShopForm" onSubmit={handleSubmit}>
           <div className="updateShopFormLeft">
             <label htmlFor="name">Shop Name</label>
             <input type="text" id="name" name="name" placeholder="Shop Name" onChange={handleChange} value={shopData.name || ""}/>
-            <label htmlFor="location">Shop Location</label>
-            <input type="text" id="location" name="location" placeholder="Shop Location" onChange={handleChange} value={shopData.location || ""}/>
             <label htmlFor="description">Description</label>
             <input type="text" id="description" name="description" placeholder="Description" onChange={handleChange} value={shopData.description || ""}/>
-            <label htmlFor="phone">Contact</label>
-            <input type="text" id="phone" name="phone" placeholder="Phone" onChange={handleChange} value={shopData.phone || ""}/>
+            <label htmlFor="shopPhoneNumber">Shop Contact</label>
+            <input type="text" id="shopPhoneNumber" name="shopPhoneNumber" placeholder="Phone" onChange={handleChange} value={shopData.shopPhoneNumber || ""}/>
+
+            {/* New form fields for floor level and shop number */}
+            <label htmlFor="floorLevel">Floor Level</label>
+            <select id="floorLevel" name="floorLevel" onChange={handleChange} value={shopData.floorLevel || ""}>
+              <option value="">Select Floor Level</option>
+              <option value="Basement">Basement</option>
+              <option value="1st Floor">1st Floor</option>
+              <option value="2nd Floor">2nd Floor</option>
+              <option value="3rd Floor">3rd Floor</option>
+              <option value="4th Floor">4th Floor</option>
+            </select>
+            <label htmlFor="shopNumber">Shop Number</label>
+            <select id="shopNumber" name="shopNumber" onChange={handleChange} value={shopData.shopNumber || ""}>
+              <option value="">Select Shop Number</option>
+              {[...Array(40)].map((_, index) => (
+                <option key={index + 1} value={index + 1}>
+                  Shop {index + 1}
+                </option>
+              ))}
+            </select>
           </div>
+
           <div className="updateShopFormRight">
             <div className="updateShopUpload">
               <img src={shopData.image} alt="" className="updateShopUploadImg" />
@@ -102,18 +137,19 @@ export default function UpdateShop() {
               </label>
               <input type="file" id="file" style={{ display: "none" }} />
             </div>
-            {/* New form fields for shop owner details */}
+            {/* New form fields for owner details */}
             <label htmlFor="ownerName">Owner Name</label>
             <input type="text" id="ownerName" name="ownerName" placeholder="Owner Name" onChange={handleChange} value={shopData.ownerName || ""}/>
             <label htmlFor="ownerEmail">Owner Email</label>
             <input type="email" id="ownerEmail" name="email" placeholder="Owner Email" onChange={handleChange} value={shopData.email || ""}/>
             <label htmlFor="ownerPhone">Owner Phone</label>
             <input type="text" id="ownerPhone" name="phone" placeholder="Owner Phone" onChange={handleChange} value={shopData.phone || ""}/>
+
           </div>
           <button className="updateShopButton" type="submit">Update</button>
         </form>
       </div>
-
+      
       {/* Confirmation Dialog */}
       <Dialog
         open={showConfirmation}
@@ -121,7 +157,7 @@ export default function UpdateShop() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">Confirm Update</DialogTitle>
+        <DialogTitle id="alert-dialog-title"        >Confirm Update</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Are you sure you want to update this shop?
@@ -132,10 +168,11 @@ export default function UpdateShop() {
             Cancel
           </Button>
           <Button onClick={confirmUpdate} color="primary" autoFocus>
-            Update
+            Confirm
           </Button>
         </DialogActions>
       </Dialog>
     </div>
   );
 }
+

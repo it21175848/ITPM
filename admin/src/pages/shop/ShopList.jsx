@@ -37,8 +37,8 @@ export default function ShopList() {
   const downloadAsPDF = () => {
     const doc = new jsPDF();
     doc.autoTable({
-      head: [['Shop ID', 'Shop Name', 'Location', 'Owner Name', 'Phone', 'Category']],
-      body: shops.map(shop => ([shop._id, shop.name, shop.location, shop.ownerName, shop.phone, shop.category])),
+      head: [['Shop ID', 'Shop Name', 'Location', 'Owner Name', 'Phone', 'Category', 'Floor Level', 'Shop Number']], // Modified header
+      body: shops.map(shop => ([shop._id, shop.name, shop.location, shop.ownerName, shop.phone, shop.category, shop.floorLevel, shop.shopNumber])), // Modified body
     });
     doc.save("shops_list.pdf");
   };
@@ -58,10 +58,11 @@ export default function ShopList() {
         );
       },
     },
-    { field: "location", headerName: "Location", width: 200 },
-    { field: "ownerName", headerName: "Shop Owner", width: 200 },
-    { field: "phone", headerName: "Owner Contact", width: 160 },
+    { field: "ownerId", headerName: "OwnerID", width: 130 },
+    { field: "shopPhoneNumber", headerName: "Shop Phone", width: 150 },
     { field: "category", headerName: "Category", width: 150 },
+    { field: "floorLevel", headerName: "Floor", width: 150 }, // Added column
+    { field: "shopNumber", headerName: "ShopNo", width: 140 }, // Added column
     {
       field: "action",
       headerName: "Action",
@@ -111,6 +112,10 @@ export default function ShopList() {
           </Button>
         </div>
       </div>
+      <br/>
+      <h3 style={{fontSize: '20px', color: 'green'}}>
+           Welcome to our Shop management dashboard. Here you can view, edit and manage Shop details.
+      </h3>
       <br/>
       <DataGrid
         rows={shops}

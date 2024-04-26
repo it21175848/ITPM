@@ -103,6 +103,10 @@ export default function OwnerList() {
         </div>
       </div>
       <br />
+      <h3 style={{fontSize: '20px', color: 'green'}}>
+        Welcome to our Owner management dashboard. Here you can view, edit and manage shop Owners details.
+      </h3>
+      <br />
       <DataGrid
         rows={owners}
         disableSelectionOnClick

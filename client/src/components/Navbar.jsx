@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../redux/userRedux";
 import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   height: 60px;
@@ -83,8 +84,12 @@ const Navbar = () => {
   const { quantity } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     dispatch(logout());
+    navigate('/login');
   };
 
   return (
@@ -99,7 +104,7 @@ const Navbar = () => {
           <Link to="/">
             <MenuItem>HOME</MenuItem>
           </Link>
-          <Link to="/shoppage">
+          <Link to="/shops">
             <MenuItem>SHOPS</MenuItem>
           </Link>
           <Link to="/">

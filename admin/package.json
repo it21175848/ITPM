@@ -9,6 +9,7 @@
     "@material-ui/data-grid": "^4.0.0-alpha.29",
     "@material-ui/icons": "^4.11.2",
     "@mui/icons-material": "^5.15.14",
+    "@mui/lab": "^5.0.0-alpha.170",
     "@mui/material": "^5.15.14",
     "@react-pdf/font": "^2.4.4",
     "@react-pdf/renderer": "^3.4.0",
