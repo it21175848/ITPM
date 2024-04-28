@@ -1,7 +1,6 @@
 /* shopPage.css */
 
 .container {
-    padding: 20px;
 }
 
 .banner-section {
@@ -18,20 +17,32 @@
 }
 
 .section {
-    padding: 50px 0;
     text-align: center;
 }
 
 .title {
+  font-size: 48px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #08c5a6; /* Added color */
+  text-shadow: 2px 1px #232323; /* Added shadow */
+}
+
+.title2 {
     font-size: 48px;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .subtitle {
-    font-size: 18px;
-    font-weight: 400;
-    margin-bottom: 40px;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #000000;
+  text-shadow: 1px 1px #d5d5d5;
+  letter-spacing: 2px; /* Added gap */
 }
 
 .search-input {
@@ -42,10 +53,16 @@
 }
 
 .categories-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card-img {
+    height: 200px;
+    /* Adjust the height as needed */
+    object-fit: cover;
 }
 
 .category-card {

@@ -22,10 +22,12 @@ const ImgContainer = styled.div`
 `;
 
 const Image = styled.img`
-  width: 100%;
-  height: 90vh;
+  max-width: 80%;
+  max-height: 80vh;
   object-fit: cover;
-  ${mobile({ height: "40vh" })}
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  ${mobile({ height: "30vh" })}
 `;
 
 const InfoContainer = styled.div`
@@ -35,11 +37,19 @@ const InfoContainer = styled.div`
 `;
 
 const Title = styled.h1`
-  font-weight: 200;
+  color: blue;
+  text-align: center;
+  font-weight: bold;
 `;
 
 const Desc = styled.p`
   margin: 20px 0px;
+`;
+
+const Texts = styled.p`
+  margin: 20px 0px;
+  color: darkgreen;
+  font-weight: bold;
 `;
 
 const Price = styled.span`
@@ -84,13 +94,11 @@ const Product = () => {
           <Title>{shop.name}</Title>
           <Desc>{shop.description}</Desc>
           <Price>Shop Category : {shop.category}</Price>
-          <Desc>Open Time : {shop.openingTime} AM</Desc>
-          <Desc>Closing Time : {shop.closingTime} PM</Desc>
-          <Desc>Contact : {shop.shopPhoneNumber}</Desc>
-          <br/>
-          
-          <Desc>Floot Level : {shop.floorLevel}</Desc>
-          <Desc>Shop Number : {shop.shopNumber}</Desc>
+          <Texts>Open Time : {shop.openingTime} AM</Texts>
+          <Texts>Closing Time : {shop.closingTime} PM</Texts>
+          <Texts>Contact : {shop.shopPhoneNumber}</Texts>
+          <Texts>Floor Level : {shop.floorLevel}</Texts>
+          <Texts>Shop Number : {shop.shopNumber}</Texts>
         </InfoContainer>
       </Wrapper>
       <Newsletter />
