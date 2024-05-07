@@ -9,6 +9,68 @@ import { logout } from "../redux/userRedux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+const Navbarx = () => {
+  const { quantity } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/login');
+  };
+
+  return (
+    <>
+      <Navbar bg="light" data-bs-theme="light">
+        <Container>
+          <Navbar.Brand href="/">EZY-Mall</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="/">HOME</Nav.Link>
+            <Nav.Link href="/shops">SHOPS</Nav.Link>
+            <Nav.Link href="/">PRODUCTS</Nav.Link>
+          </Nav>
+
+          <Nav>
+            {!user ? (
+              <>
+                <Nav.Link href="/login"><button type="button" class="btn btn-primary">LOGIN</button></Nav.Link>
+                <Nav.Link href="/register"><button type="button" class="btn btn-outline-success">REGISTER</button></Nav.Link>
+              </>
+            ) : (
+              <button onClick={handleLogout} type="button" class="btn btn-outline-danger">Logout</button>
+            )}
+          </Nav>
+        </Container>
+      </Navbar>
+      
+    </>
+  );
+};
+
+export default Navbarx;
+
+
+{/* Old Navbar code - u can use this also working-2024/04/29 -11.51AM */}
+{/*
+import { Badge } from "@material-ui/core";
+import { Search, ShoppingCartOutlined } from "@material-ui/icons";
+import React from "react";
+import styled from "styled-components";
+import { mobile } from "../responsive";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { logout } from "../redux/userRedux";
+import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+
 const Container = styled.div`
   height: 60px;
   ${mobile({ height: "50px" })}
@@ -72,11 +134,11 @@ const MenuItem = styled.div`
   margin-left: 25px;
   ${mobile({ fontSize: "14px", marginLeft: "10px" })}
   color: gray;
-  text-decoration: none; /* Remove default underline */
-  transition: color 0.3s, font-weight 0.3s; /* Smooth transition */
+  text-decoration: none;
+  transition: color 0.3s, font-weight 0.3s; 
   &:hover {
-    color: black; /* Change text color on hover */
-    font-weight: bold; /* Increase font weight on hover */
+    color: black;
+    font-weight: bold;
   }
 `;
 
@@ -141,3 +203,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+ */}

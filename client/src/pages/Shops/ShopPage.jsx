@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 
 const ShopPage = () => {
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"></link>
   const [shops, setShops] = useState([]);
   const [filteredShops, setFilteredShops] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -41,20 +42,21 @@ const ShopPage = () => {
       <Announcement />
       <Navbar />
       <div className="banner-section">
-        <h1 className="title">Shopping</h1>
+        <h1 className="title">Discover EZY-Mall: Your Shopping Destination</h1>
         <p className="subtitle">
-          Whatever you want to look for and purchase, you’ll find it here. From iconic stores such as ODEL, Cool Planet,
-          Abans and Cargills Food Hall to fun events for the kids; fabulous beauty stores to tempting fashion outlets
-          (just think Calvin Klein, Polo, Adidas, Charles & Keith, Mango, Nike and Levis to tasty food outlets &
-          refreshing beverages to peaceful areas to watch the world go by.
+          Welcome to EZY-Mall's Shop List Page. Explore a curated selection of stores offering fashion, electronics, and more. Find your favorites or uncover new treasures all in one convenient location. Begin your shopping journey today at EZY-Mall.
         </p>
-        <input
-          type="text"
-          placeholder="Search for your favorite store"
-          value={searchTerm}
-          onChange={handleSearchChange}
-          className="search-input"
-        />
+        <form class="form-inline">
+          <input
+            type="search"
+            placeholder="Search for your favorite store"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="form-control mr-sm-2 search-input"
+          />
+        </form>
+
+
       </div>
       
       <div className="section">

@@ -4,17 +4,18 @@
 }
 
 .banner-section {
-    background-image: url('./ShopImages/shoppage_banner.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    text-align: center;
+  background-image: url("./ShopImages/shoppage_banner.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
 }
+
 
 .section {
     text-align: center;
@@ -37,7 +38,7 @@
 
 .subtitle {
   padding: 20px;
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
   margin-bottom: 40px;
   color: #000000;
@@ -46,10 +47,9 @@
 }
 
 .search-input {
-    width: 300px;
+    width: 350px;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 2px solid #005f96;
 }
 
 .categories-wrapper {
