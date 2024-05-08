@@ -114,7 +114,7 @@ const Product = () => {
           <Desc>{shop.description}</Desc>
           <Price style={{ align: "left" }}>
             Shop Category :{" "}
-            <span style={{ color: "black", fontWeight: "bold" }}>
+            <span style={{ color: "#3B2F2F", fontWeight: "bold" }}>
               {" "}
               {shop.category}
             </span>
@@ -136,11 +136,11 @@ const Product = () => {
               {shop.shopPhoneNumber}
             </Texts>
             <Texts>
-              <span style={{ color: "blue" }}>Floor Level :</span>{" "}
+              <span style={{ color: "#3B2F2F" }}>Floor Level :</span>{" "}
               {shop.floorLevel}
             </Texts>
             <Texts>
-              <span style={{ color: "blue" }}>Shop Number :</span>{" "}
+              <span style={{ color: "#3B2F2F" }}>Shop Number :</span>{" "}
               {shop.shopNumber}
             </Texts>
           </div>

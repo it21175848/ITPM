@@ -12,33 +12,36 @@ import 'jspdf-autotable';
 export default function ShopList() {
   const shops = useSelector((state) => state.shop.shops);
   const dispatch = useDispatch();
-  const [showConfirmation, setShowConfirmation] = useState(false); // State variable for showing confirmation popup
-  const [deleteId, setDeleteId] = useState(null); // State variable to store the ID of the shop to be deleted
+  const [showConfirmation, setShowConfirmation] = useState(false); 
+  const [deleteId, setDeleteId] = useState(null); 
 
   useEffect(() => {
     getShops(dispatch);
+  }, [dispatch]);
+
+  useEffect(() => {
     console.log("Shops:", shops);
-  }, [dispatch, shops]);
-  
+  }, [shops]); // Log shops whenever shops state changes
+
   const handleDelete = (id) => {
-    setDeleteId(id); // Set the ID of the shop to be deleted
-    setShowConfirmation(true); // Show confirmation popup
+    setDeleteId(id);
+    setShowConfirmation(true);
   };
 
   const confirmDelete = () => {
-    deleteShop(dispatch, deleteId); // Delete the shop
-    setShowConfirmation(false); // Hide confirmation popup
+    deleteShop(dispatch, deleteId);
+    setShowConfirmation(false);
   };
 
   const cancelDelete = () => {
-    setShowConfirmation(false); // Hide confirmation popup
+    setShowConfirmation(false);
   };
 
   const downloadAsPDF = () => {
     const doc = new jsPDF();
     doc.autoTable({
-      head: [['Shop ID', 'Shop Name', 'Location', 'Owner Name', 'Phone', 'Category', 'Floor Level', 'Shop Number']], // Modified header
-      body: shops.map(shop => ([shop._id, shop.name, shop.location, shop.ownerName, shop.phone, shop.category, shop.floorLevel, shop.shopNumber])), // Modified body
+      head: [['Shop ID', 'Shop Name', 'Location', 'Owner Name', 'Phone', 'Category', 'Floor Level', 'Shop Number']],
+      body: shops.map(shop => ([shop._id, shop.name, shop.location, shop.ownerName, shop.phone, shop.category, shop.floorLevel, shop.shopNumber])),
     });
     doc.save("shops_list.pdf");
   };
@@ -61,8 +64,8 @@ export default function ShopList() {
     { field: "ownerId", headerName: "OwnerID", width: 130 },
     { field: "shopPhoneNumber", headerName: "Shop Phone", width: 150 },
     { field: "category", headerName: "Category", width: 150 },
-    { field: "floorLevel", headerName: "Floor", width: 150 }, // Added column
-    { field: "shopNumber", headerName: "ShopNo", width: 140 }, // Added column
+    { field: "floorLevel", headerName: "Floor", width: 150 },
+    { field: "shopNumber", headerName: "ShopNo", width: 140 },
     {
       field: "action",
       headerName: "Action",
@@ -126,7 +129,6 @@ export default function ShopList() {
         checkboxSelection
       />
 
-      {/* Confirmation Dialog */}
       <Dialog
         open={showConfirmation}
         onClose={cancelDelete}

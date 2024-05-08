@@ -3,15 +3,14 @@ import { useState } from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebase";
 import { addOwner } from "../../redux/apiCalls";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 export default function CreateOwner() {
   const [inputs, setInputs] = useState({});
   const [image, setImage] = useState(null);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false); // New loading state
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const handleChange = (e) => {
     setInputs({
@@ -22,15 +21,19 @@ export default function CreateOwner() {
 
   const handleClick = (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when the process starts
+
     const file = image;
 
     if (!file) {
       setError("Please select an image");
+      setLoading(false); // Reset loading when an error occurs
       return;
     }
 
-    if (!inputs.name || !inputs.email || !inputs.nic || !inputs.phone ) {
+    if (!inputs.name || !inputs.email || !inputs.nic || !inputs.phone) {
       setError("Please fill in all fields");
+      setLoading(false); // Reset loading when an error occurs
       return;
     }
 
@@ -44,7 +47,10 @@ export default function CreateOwner() {
       (snapshot) => {
         // Handle progress if needed
       },
-      (error) => console.log(error),
+      (error) => {
+        console.log(error);
+        setLoading(false); // Reset loading when an error occurs
+      },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           const ownerData = {
@@ -53,12 +59,13 @@ export default function CreateOwner() {
           };
           addOwner(ownerData, dispatch)
             .then(() => {
-              setInputs({});
-              setImage(null);
-              history.push("/ownerlist");
+              setInputs({}); // Reset form inputs
+              setImage(null); // Reset image state
+              setLoading(false); // Reset loading when the process completes
             })
             .catch((error) => {
               console.error("Error creating shop owner:", error);
+              setLoading(false); // Reset loading when an error occurs
             });
         });
       }
@@ -83,6 +90,7 @@ export default function CreateOwner() {
             name="name"
             type="text"
             placeholder="Enter owner's name"
+            value={inputs.name || ""}
             onChange={handleChange}
             required
           />
@@ -93,6 +101,7 @@ export default function CreateOwner() {
             name="email"
             type="email"
             placeholder="Enter owner's email"
+            value={inputs.email || ""}
             onChange={handleChange}
             required
           />
@@ -103,6 +112,7 @@ export default function CreateOwner() {
             name="nic"
             type="text"
             placeholder="Enter owner's NIC"
+            value={inputs.nic || ""}
             onChange={handleChange}
             required
           />
@@ -113,15 +123,18 @@ export default function CreateOwner() {
             name="phone"
             type="text"
             placeholder="Enter owner's mobile number"
+            value={inputs.phone || ""}
             onChange={handleChange}
             required
           />
         </div>
 
-        <button onClick={handleClick} className="addShopButton">
-          Create Owner
-        </button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        <div className="addShopItem">
+          <label></label>
+          <button onClick={handleClick} className="addShopButton" disabled={loading}>
+            {loading ? "Creating Owner..." : "Create Owner"}
+          </button>
+        </div>
       </form>
     </div>
   );

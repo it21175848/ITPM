@@ -4,6 +4,9 @@
   
   .addShopForm {
     margin-top: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+    width: 600px;
   }
   
   .addShopItem {
@@ -27,11 +30,11 @@
     padding: 10px;
   }
   
-  .addShopButton {
-    margin-top: 10px;
-    padding: 7px 10px;
+  .addShopItem > button {
+    margin-top: 14px;
+    padding: 13px 10px;
     border: none;
-    border-radius: 10px;
+    border-radius: 4px;
     background-color: darkblue;
     color: white;
     font-weight: 600;

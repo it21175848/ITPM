@@ -36,6 +36,7 @@ const Navbarx = () => {
             <Nav.Link href="/">HOME</Nav.Link>
             <Nav.Link href="/shops">SHOPS</Nav.Link>
             <Nav.Link href="/">PRODUCTS</Nav.Link>
+            <Nav.Link href="/chatroom">CHAT ROOM</Nav.Link>
           </Nav>
 
           <Nav>
