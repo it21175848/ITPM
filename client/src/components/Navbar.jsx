@@ -36,8 +36,16 @@ const Navbarx = () => {
             <Nav.Link href="/">HOME</Nav.Link>
             <Nav.Link href="/shops">SHOPS</Nav.Link>
             <Nav.Link href="/">PRODUCTS</Nav.Link>
-            <Nav.Link href="/chatroom">CHAT ROOM</Nav.Link>
+            <Nav.Link
+              href="http://127.0.0.1:5173/"
+              target="_blank"
+              style={{ color: "green", fontWeight: "bold" }}
+            >
+              JOIN CHAT ROOM
+            </Nav.Link>
+
           </Nav>
+
 
           <Nav>
             {!user ? (
