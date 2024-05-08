@@ -13,6 +13,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Newsletter from "./components/Newsletter";
 import Announcement from "./components/Announcement";
+import ChatRoom from "./pages/ChatRoom/ChatRoom";
 
 const App = () => {
   const user = useSelector((state) => state.user);
@@ -28,8 +29,8 @@ const App = () => {
       <Route path="/success" element={<Success />} />
       <Route path="/shops" element={<ShopPage />} />
       <Route path="/shops/:id" element={<Shop />} />
+      <Route path="/chatroom/:name" element={<ChatRoom />} />
   
-
     </Routes>
   );
 };
