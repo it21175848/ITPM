@@ -104,12 +104,14 @@ const Register = () => {
           />
           <Input
             required
+            type="password"
             name="password"
             placeholder="password"
             onChange={handleChange}
           />
           <Input
             required
+            type="password"
             name="cpassword"
             placeholder="confirm password"
             onChange={handleChange}

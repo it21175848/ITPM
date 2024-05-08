@@ -17,6 +17,9 @@ import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login";
 import CreateShop from "./pages/shop/CreateShop";
 import ShopList from "./pages/shop/ShopList";
+import CreateOwner from "./pages/ShopOwner/CreateOwner";
+import OwnerList from "./pages/ShopOwner/OwnerList";
+import UpdateOwner from "./pages/ShopOwner/UpdateOwner";
 
 import UpdateShop from "./pages/shop/UpdateShop";
 
@@ -66,6 +69,15 @@ function App() {
                 </Route>
                 <Route path="/shop/:id">
                   <UpdateShop />
+                </Route>
+                <Route path="/createowner">
+                  <CreateOwner />
+                </Route>
+                <Route path="/ownerlist">
+                  <OwnerList />
+                </Route>
+                <Route path="/owner/:id">
+                  <UpdateOwner />
                 </Route>
               </div>
             </>

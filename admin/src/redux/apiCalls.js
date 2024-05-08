@@ -19,7 +19,26 @@ import {
   deleteShopStart,
   deleteShopSuccess,
   deleteShopFailure,
+  updateShopStart,
+  updateShopSuccess,
+  updateShopFailure,
 } from "./shopRedux";
+
+//
+import {
+  getOwnerStart,
+  getOwnerSuccess,
+  getOwnerFailure,
+  deleteOwnerStart,
+  deleteOwnerSuccess,
+  deleteOwnerFailure,
+  updateOwnerStart,
+  updateOwnerSuccess,
+  updateOwnerFailure,
+  addOwnerStart,
+  addOwnerSuccess,
+  addOwnerFailure,
+} from "./ownerRedux";
 
 // Import request methods for API calls
 import { publicRequest, userRequest } from "../requestMethods";
@@ -98,12 +117,12 @@ export const deleteShop = async (dispatch, shopId) => {
 };
 
 export const updateShop = async (dispatch, shopId, shopData) => {
-  dispatch(getShopStart());
+  dispatch(updateShopStart()); // Dispatching updateShopStart instead of getShopStart
   try {
     const response = await userRequest.put(`/shops/${shopId}`, shopData);
-    dispatch(getShopSuccess(response.data));
+    dispatch(updateShopSuccess(response.data)); // Dispatching updateShopSuccess
   } catch (error) {
-    dispatch(getShopFailure());
+    dispatch(updateShopFailure()); // Dispatching updateShopFailure
   }
 };
 
@@ -114,5 +133,48 @@ export const createShop = async (shopData, dispatch) => {
     dispatch(getShopSuccess(response.data));
   } catch (error) {
     dispatch(getShopFailure());
+  }
+};
+
+// 1. ShopOwner CRUD operations
+
+export const getOwners = async (dispatch) => {
+  dispatch(getOwnerStart());
+  try {
+    const response = await userRequest.get("/owners/find");
+    const { owners } = response.data;
+    dispatch(getOwnerSuccess(owners));
+  } catch (error) {
+    dispatch(getOwnerFailure());
+  }
+};
+
+export const deleteOwner = async (dispatch, ownerId) => {
+  dispatch(deleteOwnerStart());
+  try {
+    await userRequest.delete(`/owners/${ownerId}`);
+    dispatch(deleteOwnerSuccess(ownerId));
+  } catch (error) {
+    dispatch(deleteOwnerFailure());
+  }
+};
+
+export const updateOwner = async (dispatch, id, owner) => {
+  dispatch(updateOwnerStart());
+  try {
+    await userRequest.put(`/owners/${owner._id}`, owner);
+    dispatch(updateOwnerSuccess({ id: id, owner: owner }));
+  } catch (error) {
+    dispatch(updateOwnerFailure());
+  }
+};
+
+export const addOwner = async (owner, dispatch) => {
+  dispatch(addOwnerStart());
+  try {
+    const res = await userRequest.post("/owners", owner);
+    dispatch(addOwnerSuccess(res.data));
+  } catch (error) {
+    dispatch(addOwnerFailure());
   }
 };

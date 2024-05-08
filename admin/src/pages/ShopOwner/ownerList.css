@@ -1,0 +1,45 @@
+.ownerList {
+    flex: 4;
+}
+
+.ownerListItem {
+    display: flex;
+    align-items: center;
+}
+
+.ownerListImg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.ownerListEdit {
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: #3bb077;
+    color: white;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.ownerListDelete {
+    color: red;
+    cursor: pointer;
+}
+
+.ownerListHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ownerListHeaderRight {
+    display: flex;
+    align-items: center;
+}
+
+.searchBar {
+    margin-bottom: 20px;
+}

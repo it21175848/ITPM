@@ -5,28 +5,53 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteShop, getShops } from "../../redux/apiCalls";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 export default function ShopList() {
   const shops = useSelector((state) => state.shop.shops);
   const dispatch = useDispatch();
-  
+  const [showConfirmation, setShowConfirmation] = useState(false); 
+  const [deleteId, setDeleteId] = useState(null); 
 
   useEffect(() => {
     getShops(dispatch);
+  }, [dispatch]);
+
+  useEffect(() => {
     console.log("Shops:", shops);
-  }, [dispatch, shops]);
-  
+  }, [shops]); // Log shops whenever shops state changes
+
   const handleDelete = (id) => {
-    deleteShop(dispatch, id);
+    setDeleteId(id);
+    setShowConfirmation(true);
+  };
+
+  const confirmDelete = () => {
+    deleteShop(dispatch, deleteId);
+    setShowConfirmation(false);
+  };
+
+  const cancelDelete = () => {
+    setShowConfirmation(false);
+  };
+
+  const downloadAsPDF = () => {
+    const doc = new jsPDF();
+    doc.autoTable({
+      head: [['Shop ID', 'Shop Name', 'Location', 'Owner Name', 'Phone', 'Category', 'Floor Level', 'Shop Number']],
+      body: shops.map(shop => ([shop._id, shop.name, shop.location, shop.ownerName, shop.phone, shop.category, shop.floorLevel, shop.shopNumber])),
+    });
+    doc.save("shops_list.pdf");
   };
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 220 },
+    { field: "_id", headerName: "ID", width: 100 },
     {
       field: "shop",
       headerName: "Shop",
       width: 200,
-
       renderCell: (params) => {
         return (
           <div className="shopListItem">
@@ -35,20 +60,12 @@ export default function ShopList() {
           </div>
         );
       },
-  
     },
-    { field: "location", headerName: "Location", width: 200 },
-
-    {
-      field: "contact",
-      headerName: "Contact",
-      width: 160,
-    },
-    {
-      field: "category",
-      headerName: "Category",
-      width: 150,
-    },
+    { field: "ownerId", headerName: "OwnerID", width: 130 },
+    { field: "shopPhoneNumber", headerName: "Shop Phone", width: 150 },
+    { field: "category", headerName: "Category", width: 150 },
+    { field: "floorLevel", headerName: "Floor", width: 150 },
+    { field: "shopNumber", headerName: "ShopNo", width: 140 },
     {
       field: "action",
       headerName: "Action",
@@ -71,6 +88,38 @@ export default function ShopList() {
 
   return (
     <div className="shopList">
+      <div className="productListHeader">
+        <h2>Shops List</h2>
+        <div className="productListHeaderRight">
+          <Link to="/createshop">
+            <Button 
+              variant="contained" 
+              color="primary" 
+              className="productButton" 
+              style={{  padding: "8px 70px", margin: "0 20px" }}
+            >
+              ADD SHOP
+            </Button>
+          </Link>
+          <Button
+            variant="contained"
+            color="primary"
+            style={{
+              padding: "8px 40px",
+              margin: "0 10px",
+              backgroundColor: "green",
+            }}
+            onClick={downloadAsPDF}
+          >
+            Download As PDF
+          </Button>
+        </div>
+      </div>
+      <br/>
+      <h3 style={{fontSize: '20px', color: 'green'}}>
+           Welcome to our Shop management dashboard. Here you can view, edit and manage Shop details.
+      </h3>
+      <br/>
       <DataGrid
         rows={shops}
         disableSelectionOnClick
@@ -79,6 +128,28 @@ export default function ShopList() {
         getRowId={(row) => row._id}
         checkboxSelection
       />
+
+      <Dialog
+        open={showConfirmation}
+        onClose={cancelDelete}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Confirm Delete</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete this shop?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={cancelDelete} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={confirmDelete} color="primary" autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
