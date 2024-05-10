@@ -5,9 +5,16 @@ import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProducts } from "../../redux/apiCalls";
-import { Button, TextField, MenuItem, Select, InputLabel } from "@material-ui/core";
-
-
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@material-ui/core";
 
 export default function ProductList() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,15 +22,14 @@ export default function ProductList() {
   const [selectedStock, setSelectedStock] = useState("");
   const products = useSelector((state) => state.product.products);
   const dispatch = useDispatch();
-  
+  const [deleteId, setDeleteId] = useState(null);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
   useEffect(() => {
     getProducts(dispatch);
     console.log("products:", products);
   }, [dispatch]);
-  
-  const handleDelete = (id) => {
-    deleteProduct(dispatch, id);
-  };
+
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -34,6 +40,33 @@ export default function ProductList() {
 
   const handleStockChange = (event) => {
     setSelectedStock(event.target.value);
+  };
+
+  const handleDelete = (id) => {
+    setDeleteId(id);
+    setShowConfirmation(true);
+  };
+
+  const confirmDelete = () => {
+    deleteProduct(dispatch, deleteId);
+    setShowConfirmation(false);
+  };
+
+  const cancelDelete = () => {
+    setShowConfirmation(false);
+  };
+
+  const downloadAsPDF = () => {
+    const doc = new jsPDF();
+    doc.autoTable({
+      head: [["Product ID", "Product Name", "Stock"]],
+      body: products.map((product) => [
+        product._id,
+        product.name,
+        product.stock,
+      ]),
+    });
+    doc.save("product_list.pdf");
   };
 
   const columns = [
@@ -73,7 +106,7 @@ export default function ProductList() {
               onClick={() => handleDelete(params.row._id)}
             />
           </>
-        ); 
+        );
       },
     },
   ];
@@ -84,18 +117,30 @@ export default function ProductList() {
         <h2>Product List</h2>
         <div className="productListHeaderRight">
           <Link to="/NewProduct">
-            <Button 
-              variant="contained" 
-              color="primary" 
-              className="productButton" 
-              style={{  padding: "8px 70px" }}
+            <Button
+              variant="contained"
+              color="primary"
+              className="productButton"
+              style={{ padding: "8px 70px" }}
             >
               Create
             </Button>
           </Link>
+          <Button
+            variant="contained"
+            color="primary"
+            style={{
+              padding: "8px 40px",
+              margin: "0 10px",
+              backgroundColor: "green",
+            }}
+            onClick={downloadAsPDF}
+          >
+            Download As PDF
+          </Button>
         </div>
       </div>
-      <br/>
+      <br />
       <DataGrid
         rows={products}
         disableSelectionOnClick
@@ -104,6 +149,27 @@ export default function ProductList() {
         getRowId={(row) => row._id}
         checkboxSelection
       />
+      <Dialog
+        open={showConfirmation}
+        onClose={cancelDelete}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Confirm Delete</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete this shop?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={cancelDelete} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={confirmDelete} color="primary" autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
