@@ -1,0 +1,93 @@
+/* shopPage.css */
+
+.container {
+}
+
+.banner-section {
+  background-image: url("./ShopImages/shoppage_banner.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+}
+
+
+.section {
+    text-align: center;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #08c5a6; /* Added color */
+  text-shadow: 2px 1px #232323; /* Added shadow */
+}
+
+.title2 {
+    font-size: 48px;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.subtitle {
+  padding: 20px;
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #000000;
+  text-shadow: 1px 1px #d5d5d5;
+  letter-spacing: 2px; /* Added gap */
+}
+
+.search-input {
+    width: 350px;
+    padding: 10px;
+    border: 2px solid #005f96;
+}
+
+.categories-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card-img {
+    height: 200px;
+    /* Adjust the height as needed */
+    object-fit: cover;
+}
+
+.category-card {
+    width: 200px;
+    margin: 20px;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.category-image {
+    width: 100%;
+    border-radius: 4px;
+}
+
+.category-title {
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 15px;
+}
