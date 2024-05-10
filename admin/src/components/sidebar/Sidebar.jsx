@@ -16,6 +16,8 @@ import {
   WorkOutline,
   Report,
 } from "@material-ui/icons";
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import { useDispatch } from "react-redux";
@@ -78,7 +80,7 @@ export default function Sidebar() {
             </Link>
             <Link to="/parkings" className="link">
               <li className="sidebarListItem">
-                <MapOutlined className="sidebarIcon" />
+                <DirectionsCarIcon className="sidebarIcon" />
                 Parkings
               </li>
             </Link>
