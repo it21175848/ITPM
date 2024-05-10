@@ -1,51 +1,65 @@
+
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteOwner, getOwners } from "../../redux/apiCalls";
+import { deleteOwner, getOwners, getShops } from "../../redux/apiCalls";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import './ownerList.css'
 
 export default function OwnerList() {
-  const [showConfirmation, setShowConfirmation] = useState(false); // State variable for showing confirmation popup
-  const [deleteId, setDeleteId] = useState(null); // State variable to store the ID of the owner to be deleted
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
 
   const owners = useSelector((state) => state.owner.owners);
+  const shops = useSelector((state) => state.shop.shops);
   const dispatch = useDispatch();
 
   useEffect(() => {
     getOwners(dispatch);
+    getShops(dispatch);
   }, [dispatch]);
 
   const handleDelete = (id) => {
-    setDeleteId(id); // Set the ID of the owner to be deleted
-    setShowConfirmation(true); // Show confirmation popup
+    setDeleteId(id);
+    setShowConfirmation(true);
   };
 
   const confirmDelete = () => {
-    deleteOwner(dispatch, deleteId); // Delete the owner
-    setShowConfirmation(false); // Hide confirmation popup
+    deleteOwner(dispatch, deleteId);
+    setShowConfirmation(false);
   };
 
   const cancelDelete = () => {
-    setShowConfirmation(false); // Hide confirmation popup
+    setShowConfirmation(false);
   };
 
   const downloadAsPDF = () => {
     const doc = new jsPDF();
     doc.autoTable({
-      head: [['ID', 'Shop ID', 'Owner Name', 'Email', 'NIC']],
-      body: owners.map(owner => ([owner._id, owner.shopId, owner.name, owner.email, owner.nic])),
+      head: [['ID', 'Shop Name', 'Owner Name', 'Email', 'NIC']],
+      body: owners.map(owner => {
+        const shop = shops.find(shop => shop.ownerId === owner._id);
+        return [owner._id, shop ? shop.name : '', owner.name, owner.email, owner.nic];
+      }),
     });
     doc.save("owners_list.pdf");
   };
 
   const columns = [
     { field: "_id", headerName: "ID", width: 200 },
-    { field: "shopId", headerName: "Shop ID", width: 200 },
+    {
+      field: "shopName",
+      headerName: "Shop Name",
+      width: 200,
+      valueGetter: (params) => {
+        const shop = shops.find(shop => shop.ownerId === params.row._id);
+        return shop ? shop.name : '';
+      },
+    },
     {
       field: "name",
       headerName: "Owner Name",
@@ -73,7 +87,7 @@ export default function OwnerList() {
     },
   ];
 
-  return (
+return (
     <div className="ownerList">
       <div className="productListHeader">
         <h2>Owner List</h2>
