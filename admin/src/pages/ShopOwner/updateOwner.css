@@ -1,0 +1,128 @@
+.updateOwner {
+    flex: 4;
+    padding: 20px;
+}
+
+.updateOwnerTitleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.updateOwnerAddButton {
+    width: 80px;
+    border: none;
+    padding: 5px;
+    background-color: teal;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.updateOwnerTop {
+    display: flex;
+}
+
+.updateOwnerTopLeft,
+.updateOwnerTopRight {
+    flex: 1;
+}
+
+.updateOwnerTopRight {
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.updateOwnerInfoImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.updateOwnerInfoTop {
+    display: flex;
+    align-items: center;
+}
+
+.updateOwnerName {
+    font-weight: 600;
+}
+
+.updateOwnerInfoBottom {
+    margin-top: 10px;
+}
+
+.updateOwnerInfoItem {
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.updateOwnerInfoValue {
+    font-weight: 300;
+}
+
+.updateOwnerBottom {
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.updateOwnerForm {
+    display: flex;
+    justify-content: space-between;
+}
+
+.updateOwnerFormLeft {
+    display: flex;
+    flex-direction: column;
+}
+
+.updateOwnerFormLeft>label {
+    margin-bottom: 10px;
+    color: gray;
+}
+
+.updateOwnerFormLeft>input {
+    margin-bottom: 10px;
+    border: none;
+    padding: 5px;
+    border-bottom: 1px solid gray;
+}
+
+.updateOwnerFormLeft>select {
+    margin-bottom: 10px;
+}
+
+.updateOwnerUploadImg {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.updateOwnerFormRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.updateOwnerUpload {
+    display: flex;
+    align-items: center;
+}
+
+.updateOwnerButton {
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: darkblue;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}

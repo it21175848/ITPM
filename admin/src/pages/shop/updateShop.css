@@ -1,0 +1,128 @@
+.updateShop {
+  flex: 4;
+  padding: 20px;
+}
+
+.updateShopTitleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.updateShopAddButton {
+  width: 80px;
+  border: none;
+  padding: 5px;
+  background-color: teal;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.updateShopTop {
+  display: flex;
+}
+
+.updateShopTopLeft,
+.updateShopTopRight {
+  flex: 1;
+}
+
+.updateShopTopRight {
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.updateShopInfoImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.updateShopInfoTop {
+  display: flex;
+  align-items: center;
+}
+
+.updateShopName {
+  font-weight: 600;
+}
+
+.updateShopInfoBottom {
+  margin-top: 10px;
+}
+
+.updateShopInfoItem {
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.updateShopInfoValue {
+  font-weight: 300;
+}
+
+.updateShopBottom {
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.updateShopForm {
+  display: flex;
+  justify-content: space-between;
+}
+
+.updateShopFormLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.updateShopFormLeft > label {
+  margin-bottom: 10px;
+  color: gray;
+}
+
+.updateShopFormLeft > input {
+  margin-bottom: 10px;
+  border: none;
+  padding: 5px;
+  border-bottom: 1px solid gray;
+}
+
+.updateShopFormLeft > select {
+  margin-bottom: 10px;
+}
+
+.updateShopUploadImg {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.updateShopFormRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.updateShopUpload {
+  display: flex;
+  align-items: center;
+}
+
+.updateShopButton {
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: darkblue;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
