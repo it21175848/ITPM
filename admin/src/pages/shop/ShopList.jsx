@@ -89,7 +89,7 @@ export default function ShopList() {
   return (
     <div className="shopList">
       <div className="productListHeader">
-        <h2>Shops List</h2>
+        <h2 style={{color: 'blue', fontSize: '30px'}}>Shops List</h2>
         <div className="productListHeaderRight">
           <Link to="/createshop">
             <Button 

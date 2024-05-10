@@ -31,8 +31,10 @@ const ShopPage = () => {
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
-    const filtered = shops.filter(shop =>
-      shop.name.toLowerCase().includes(event.target.value.toLowerCase())
+    const filtered = shops.filter(
+      (shop) =>
+        shop.name.toLowerCase().includes(event.target.value.toLowerCase()) ||
+        shop.category.toLowerCase().includes(event.target.value.toLowerCase())
     );
     setFilteredShops(filtered);
   };
@@ -83,8 +85,8 @@ const ShopPage = () => {
                 <Card.Body>
                   <Card.Title>{shop.name}</Card.Title>
                   <div style={{ textAlign: "left" }}>
-                    <Card.Text>{shop.category}</Card.Text>
-                    <Card.Text>Floor : {shop.floorLevel}</Card.Text>
+                    <Card.Text>Category : {shop.category}</Card.Text>
+                    <Card.Text>Floor Level : {shop.floorLevel}</Card.Text>
                     <Card.Text>Shop No : {shop.shopNumber}</Card.Text>
                     <Card.Text>Mobile : {shop.shopPhoneNumber}</Card.Text>
                   </div>
@@ -94,8 +96,6 @@ const ShopPage = () => {
           ))}
         </div>
       </div>
-
-
 
       <Newsletter />
       <Footer />

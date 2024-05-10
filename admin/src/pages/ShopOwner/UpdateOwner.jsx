@@ -12,6 +12,7 @@ export default function UpdateOwner() {
   const history = useHistory();
   const dispatch = useDispatch();
   const owners = useSelector((state) => state.owner.owners);
+  const shops = useSelector((state) => state.shop.shops); // Assuming you have shops in the Redux store
   const [ownerData, setOwnerData] = useState({});
   const [showConfirmation, setShowConfirmation] = useState(false); // State variable for showing confirmation popup
 
@@ -77,6 +78,15 @@ export default function UpdateOwner() {
             <div className="updateOwnerInfoItem">
               <span className="updateOwnerInfoKey">NIC:</span>
               <span className="updateOwnerInfoValue">{ownerData.nic}</span>
+            </div>
+            <div className="updateOwnerInfoItem">
+              {/* Display shop names here */}
+              <span className="updateOwnerInfoKey">Shop Name:</span>
+              {shops.map((shop) => shop.ownerId === id && (
+                <div key={shop._id}>   
+                  <span style={{ fontWeight: "bold", color: "red" }} className="updateOwnerInfoValue">{shop.name},</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>

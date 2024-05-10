@@ -9,6 +9,8 @@ const orderRoute = require("./routes/order");
 const stripeRoute = require("./routes/stripe");
 const shopRoute = require("./routes/shop");
 const ownerRoute = require("./routes/owner");
+const parkingRoute = require("./routes/Parking");
+const customerSupport = require("./routes/customerSupports");
 
 const app = express();
 connectToMongo();
@@ -25,9 +27,11 @@ app.use("/api/carts", cartRoute);
 app.use("/api/checkout", stripeRoute);
 app.use("/api/shops", shopRoute);
 app.use("/api/owners", ownerRoute);
+app.use("/api/parking", parkingRoute);
+app.use("/api/customerSupport", customerSupport);
 
 app.get("/", (req, res) => {
-  res.send("Sup nigga?");
+  res.send("well come to sever");
 });
 app.listen(PORT, () => {
   console.log(`Backend Server is running on port ${PORT}`);

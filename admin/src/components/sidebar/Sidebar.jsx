@@ -16,6 +16,8 @@ import {
   WorkOutline,
   Report,
 } from "@material-ui/icons";
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import { useDispatch } from "react-redux";
@@ -74,6 +76,18 @@ export default function Sidebar() {
               <li className="sidebarListItem">
                 <People className="sidebarIcon" />
                 Owners
+              </li>
+            </Link>
+            <Link to="/parkings" className="link">
+              <li className="sidebarListItem">
+                <DirectionsCarIcon className="sidebarIcon" />
+                Parkings
+              </li>
+            </Link>
+            <Link to="/customerSupportList" className="link">
+              <li className="sidebarListItem">
+                <DirectionsCarIcon className="sidebarIcon" />
+                Customer Support
               </li>
             </Link>
             <Link to="/shoplist" className="link">
