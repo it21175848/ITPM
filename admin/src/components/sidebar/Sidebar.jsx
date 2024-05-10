@@ -84,6 +84,12 @@ export default function Sidebar() {
                 Parkings
               </li>
             </Link>
+            <Link to="/customerSupportList" className="link">
+              <li className="sidebarListItem">
+                <DirectionsCarIcon className="sidebarIcon" />
+                Customer Support
+              </li>
+            </Link>
             <Link to="/shoplist" className="link">
               <li className="sidebarListItem">
                 <MapOutlined className="sidebarIcon" />

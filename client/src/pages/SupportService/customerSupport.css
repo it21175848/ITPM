@@ -1,0 +1,55 @@
+.newShop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  margin: 50px;
+}
+
+.addShopForm {
+  margin-top: 20px;
+}
+
+.addShopItem {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.addShopItem > label {
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.addShopItem > input,
+.addShopItem > textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+  width: 100%;
+}
+
+.addShopItem > input:focus,
+.addShopItem > textarea:focus {
+  outline: none;
+  border-color: #6c63ff;
+}
+
+.addShopButton {
+  margin-top: 20px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #6c63ff;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.addShopButton:hover {
+  background-color: #524dd7;
+}

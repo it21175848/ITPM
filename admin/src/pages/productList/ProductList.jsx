@@ -81,7 +81,7 @@ export default function ProductList() {
   return (
     <div className="productList">
       <div className="productListHeader">
-        <h2>Product List</h2>
+        <h2 style={{color: 'blue', fontSize: '30px'}}>Product List</h2>
         <div className="productListHeaderRight">
           <Link to="/NewProduct">
             <Button 

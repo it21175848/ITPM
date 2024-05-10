@@ -1,36 +1,44 @@
-
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteOwner, getOwners, getShops } from "../../redux/apiCalls";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import './ownerList.css'
+import axios from 'axios'; // Import axios for making HTTP requests
+import './ownerList.css';
 
-export default function OwnerList() {
+export default function CustomerSupportList() {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
-
-  const owners = useSelector((state) => state.owner.owners);
-  const shops = useSelector((state) => state.shop.shops);
-  const dispatch = useDispatch();
+  const [customerSupports, setCustomerSupports] = useState([]);
 
   useEffect(() => {
-    getOwners(dispatch);
-    getShops(dispatch);
-  }, [dispatch]);
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/customerSupport/");
+      setCustomerSupports(response.data);
+    } catch (error) {
+      console.error("Error fetching customer support data:", error);
+    }
+  };
 
   const handleDelete = (id) => {
     setDeleteId(id);
     setShowConfirmation(true);
   };
 
-  const confirmDelete = () => {
-    deleteOwner(dispatch, deleteId);
-    setShowConfirmation(false);
+  const confirmDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:5000/api/customerSupport/${deleteId}`);
+      setCustomerSupports(customerSupports.filter((item) => item._id !== deleteId));
+      setShowConfirmation(false);
+    } catch (error) {
+      console.error("Error deleting customer support ticket:", error);
+    }
   };
 
   const cancelDelete = () => {
@@ -40,33 +48,23 @@ export default function OwnerList() {
   const downloadAsPDF = () => {
     const doc = new jsPDF();
     doc.autoTable({
-      head: [['ID', 'Shop Name', 'Owner Name', 'Email', 'NIC']],
-      body: owners.map(owner => {
-        const shop = shops.find(shop => shop.ownerId === owner._id);
-        return [owner._id, shop ? shop.name : '', owner.name, owner.email, owner.nic];
-      }),
+      head: [['ID', 'Name', 'Email', 'Subject', 'Message', 'Phone Number']],
+      body: customerSupports.map(customerSupport => ([customerSupport._id, customerSupport.name, customerSupport.email, customerSupport.subject, customerSupport.message, customerSupport.phoneNo])),
     });
-    doc.save("owners_list.pdf");
+    doc.save("customer_support_list.pdf");
   };
 
   const columns = [
     { field: "_id", headerName: "ID", width: 200 },
     {
-      field: "shopName",
-      headerName: "Shop Name",
-      width: 200,
-      valueGetter: (params) => {
-        const shop = shops.find(shop => shop.ownerId === params.row._id);
-        return shop ? shop.name : '';
-      },
-    },
-    {
       field: "name",
-      headerName: "Owner Name",
+      headerName: "Name",
       width: 200,
     },
     { field: "email", headerName: "Email", width: 200 },
-    { field: "nic", headerName: "NIC", width: 160 },
+    { field: "subject", headerName: "Subject", width: 200 },
+    { field: "message", headerName: "Message", width: 200 },
+    { field: "phoneNo", headerName: "Phone Number", width: 160 },
     {
       field: "action",
       headerName: "Action",
@@ -74,8 +72,8 @@ export default function OwnerList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/owner/" + params.row._id}>
-              <button className="ownerListEdit">Edit</button>
+            <Link to={`/customerSupportList/${params.row._id}`}>
+              <button className="ownerListEdit">View</button>
             </Link>
             <DeleteOutline
               className="ownerListDelete"
@@ -87,21 +85,11 @@ export default function OwnerList() {
     },
   ];
 
-return (
+  return (
     <div className="ownerList">
       <div className="productListHeader">
-        <h2 style={{color: 'blue', fontSize: '30px'}}>Owners List</h2>
+        <h2>Customer Support List</h2>
         <div className="productListHeaderRight">
-          <Link to="/createowner">
-            <Button
-              variant="contained"
-              color="primary"
-              className="productButton"
-              style={{ padding: "8px 70px" ,margin: "0 20px"}}
-            >
-              ADD OWNER
-            </Button>
-          </Link>
           <Button
             variant="contained"
             color="primary"
@@ -117,12 +105,8 @@ return (
         </div>
       </div>
       <br />
-      <h3 style={{fontSize: '20px', color: 'green'}}>
-        Welcome to our Owner management dashboard. Here you can view, edit and manage shop Owners details.
-      </h3>
-      <br />
       <DataGrid
-        rows={owners}
+        rows={customerSupports}
         disableSelectionOnClick
         columns={columns}
         pageSize={8}
@@ -130,7 +114,6 @@ return (
         checkboxSelection
       />
 
-      {/* Confirmation Dialog */}
       <Dialog
         open={showConfirmation}
         onClose={cancelDelete}
@@ -140,7 +123,7 @@ return (
         <DialogTitle id="alert-dialog-title">Confirm Delete</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete this owner?
+            Are you sure you want to delete this customer support ticket?
           </DialogContentText>
         </DialogContent>
         <DialogActions>

@@ -25,6 +25,9 @@ import UpdateShop from "./pages/shop/UpdateShop";
 import ParkingList from "./pages/Parkings/ParkingList";
 import EditParking from "./pages/Parkings/editParking";
 
+import CustomerSupportList from "./pages/CustomerSupport/CustomerSupportList";
+import CustomerSupportEdit from "./pages/CustomerSupport/CustomerSupportEdit";
+
 import { useSelector } from "react-redux";
 function App() {
   const { isAdmin } = useSelector((state) => state.user);
@@ -86,6 +89,12 @@ function App() {
                 </Route>
                 <Route path="/edit-parking/:id">
                   <EditParking />
+                </Route>
+                <Route path="/customerSupportList">
+                  <CustomerSupportList />
+                </Route>
+                <Route path="/customerSupportList/:id">
+                  <CustomerSupportEdit />
                 </Route>
               </div>
             </>

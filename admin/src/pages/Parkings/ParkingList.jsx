@@ -81,7 +81,7 @@ export default function ParkingList() {
   return (
     <div className="shopList">
     <div style={{ height: 400, width: '100%' }}>
-      <h2>Parking Slots List</h2>
+      <h2 style={{color: 'blue', fontSize: '30px'}}>Parking Slots List</h2>
       <br/>
       <div className="productListHeaderRight">
           <Button
