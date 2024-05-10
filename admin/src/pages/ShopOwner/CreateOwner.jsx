@@ -4,12 +4,14 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebase";
 import { addOwner } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
 
 export default function CreateOwner() {
   const [inputs, setInputs] = useState({});
   const [image, setImage] = useState(null);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); // New loading state
+  const [loading, setLoading] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false); // State variable for showing confirmation popup
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -21,23 +23,21 @@ export default function CreateOwner() {
 
   const handleClick = (e) => {
     e.preventDefault();
+
+    // Check if any input field is empty
+    if (!inputs.name || !inputs.email || !inputs.nic || !inputs.phone || !image) {
+      setError("Please fill in all fields and select an image");
+      return;
+    }
+
+    setShowConfirmation(true); // Show confirmation popup when creating a new owner
+  };
+
+  const confirmCreateOwner = async () => {
     setLoading(true); // Set loading to true when the process starts
+    setError(""); // Reset error message
 
     const file = image;
-
-    if (!file) {
-      setError("Please select an image");
-      setLoading(false); // Reset loading when an error occurs
-      return;
-    }
-
-    if (!inputs.name || !inputs.email || !inputs.nic || !inputs.phone) {
-      setError("Please fill in all fields");
-      setLoading(false); // Reset loading when an error occurs
-      return;
-    }
-
-    setError("");
 
     const storageRef = ref(storage, `owners/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -50,6 +50,7 @@ export default function CreateOwner() {
       (error) => {
         console.log(error);
         setLoading(false); // Reset loading when an error occurs
+        setShowConfirmation(false); // Hide confirmation popup
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -62,20 +63,27 @@ export default function CreateOwner() {
               setInputs({}); // Reset form inputs
               setImage(null); // Reset image state
               setLoading(false); // Reset loading when the process completes
+              setShowConfirmation(false); // Hide confirmation popup
             })
             .catch((error) => {
               console.error("Error creating shop owner:", error);
               setLoading(false); // Reset loading when an error occurs
+              setShowConfirmation(false); // Hide confirmation popup
             });
         });
       }
     );
   };
 
+  const cancelCreateOwner = () => {
+    setShowConfirmation(false); // Hide confirmation popup
+  };
+
   return (
     <div className="newShop">
       <h1 className="addShopTitle">Add New Shop Owner</h1>
       <form className="addShopForm">
+        {/* Form inputs */}
         <div className="addShopItem">
           <label>Image</label>
           <input
@@ -130,12 +138,35 @@ export default function CreateOwner() {
         </div>
 
         <div className="addShopItem">
-          <label></label>
+          <label>{error}</label>
           <button onClick={handleClick} className="addShopButton" disabled={loading}>
             {loading ? "Creating Owner..." : "Create Owner"}
           </button>
         </div>
       </form>
+
+      {/* Confirmation Dialog */}
+      <Dialog
+        open={showConfirmation}
+        onClose={cancelCreateOwner}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Confirm Create Owner</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to create this owner?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={cancelCreateOwner} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={confirmCreateOwner} color="primary" autoFocus>
+            Create
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

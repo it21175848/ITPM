@@ -76,6 +76,12 @@ export default function Sidebar() {
                 Owners
               </li>
             </Link>
+            <Link to="/parkings" className="link">
+              <li className="sidebarListItem">
+                <MapOutlined className="sidebarIcon" />
+                Parkings
+              </li>
+            </Link>
             <Link to="/shoplist" className="link">
               <li className="sidebarListItem">
                 <MapOutlined className="sidebarIcon" />

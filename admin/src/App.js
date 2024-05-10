@@ -22,6 +22,8 @@ import OwnerList from "./pages/ShopOwner/OwnerList";
 import UpdateOwner from "./pages/ShopOwner/UpdateOwner";
 
 import UpdateShop from "./pages/shop/UpdateShop";
+import ParkingList from "./pages/Parkings/ParkingList";
+import EditParking from "./pages/Parkings/editParking";
 
 import { useSelector } from "react-redux";
 function App() {
@@ -78,6 +80,12 @@ function App() {
                 </Route>
                 <Route path="/owner/:id">
                   <UpdateOwner />
+                </Route>
+                <Route path="/parkings">
+                  <ParkingList />
+                </Route>
+                <Route path="/edit-parking/:id">
+                  <EditParking />
                 </Route>
               </div>
             </>

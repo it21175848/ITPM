@@ -13,6 +13,8 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Newsletter from "./components/Newsletter";
 import Announcement from "./components/Announcement";
+import  ParkingLot from "./pages/Parking/parking";
+import ParkingForm from "./pages/Parking/parkingForm";
 
 const App = () => {
   const user = useSelector((state) => state.user);
@@ -28,6 +30,8 @@ const App = () => {
       <Route path="/success" element={<Success />} />
       <Route path="/shops" element={<ShopPage />} />
       <Route path="/shops/:id" element={<Shop />} />
+      <Route path="/parking" element={<ParkingLot />} />
+      <Route path="/parking-form/:slotId" element={<ParkingForm />} />
   
     </Routes>
   );
