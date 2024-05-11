@@ -137,14 +137,14 @@ export default function UpdateShop() {
               </label>
               <input type="file" id="file" style={{ display: "none" }} />
             </div>
-            {/* New form fields for owner details */}
+            {/* New form fields for owner details 
             <label htmlFor="ownerName">Owner Name</label>
             <input type="text" id="ownerName" name="ownerName" placeholder="Owner Name" onChange={handleChange} value={shopData.ownerName || ""}/>
             <label htmlFor="ownerEmail">Owner Email</label>
             <input type="email" id="ownerEmail" name="email" placeholder="Owner Email" onChange={handleChange} value={shopData.email || ""}/>
             <label htmlFor="ownerPhone">Owner Phone</label>
             <input type="text" id="ownerPhone" name="phone" placeholder="Owner Phone" onChange={handleChange} value={shopData.phone || ""}/>
-
+            */}
           </div>
           <button className="updateShopButton" type="submit">Update</button>
         </form>
