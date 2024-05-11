@@ -9,6 +9,9 @@ import {
   deleteProductStart,
   deleteProductSuccess,
   deleteProductFailure,
+  updateProductFailure,
+  updateProductStart,
+  updateProductSuccess,
 } from "./productRedux";
 
 //for Shop redux slice
@@ -69,19 +72,19 @@ export const getProducts = async (dispatch) => {
 export const deleteProduct = async (dispatch, productId) => {
   dispatch(deleteProductStart());
   try {
-    // await userRequest.delete(`/products/${productId}`);
+    await userRequest.delete(`/products/${productId}`);
     dispatch(deleteProductSuccess(productId));
   } catch (error) {
     dispatch(deleteProductFailure());
   }
 };
 export const updateProduct = async (dispatch, id, product) => {
-  dispatch(getProductStart());
+  dispatch(updateProductStart());
   try {
-    await userRequest.put(`/products/${product._id}`, product);
-    dispatch(getProductSuccess({ id: id, product: product }));
+    await userRequest.put(`/products/${id}`, product);
+    dispatch(updateProductSuccess({ id: id, product: product }));
   } catch (error) {
-    dispatch(getProductFailure());
+    dispatch(updateProductFailure());
   }
 };
 export const addProduct = async (product, dispatch) => {

@@ -176,19 +176,16 @@ export default function NewProduct() {
               />
             </div>
             <div className="addProductItem">
-              <InputLabel id="categories-label">Categories</InputLabel>
-              <Select
-                labelId="categories-label"
-                id="categories"
-                multiple
-                value={cat}
-                onChange={handlecat}
+            <div className="addProductItem">
+              <label>Categories</label>
+              <TextField
+                name="categories"
+                type="text"
+                placeholder="Categories"
+                onChange={handleChange}
                 fullWidth
-              >
-                <MenuItem value="Man">Man</MenuItem>
-                <MenuItem value="Jeans">Jeans</MenuItem>
-                {/* Add more categories as needed */}
-              </Select>
+              />
+            </div>
             </div>
             <div className="addProductItem">
               <label>Price</label>
