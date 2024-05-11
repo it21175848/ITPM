@@ -59,11 +59,12 @@ export default function ProductList() {
   const downloadAsPDF = () => {
     const doc = new jsPDF();
     doc.autoTable({
-      head: [["Product ID", "Product Name", "Stock"]],
+      head: [["Product ID", "Product Name", "Stock", "Price"]],
       body: products.map((product) => [
         product._id,
-        product.name,
-        product.stock,
+        product.title,
+        product.inStock,
+        product.price,
       ]),
     });
     doc.save("product_list.pdf");

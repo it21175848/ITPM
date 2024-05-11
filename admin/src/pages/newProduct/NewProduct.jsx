@@ -16,14 +16,11 @@ import {
 } from "@mui/material";
 import Chart from "../../components/chart/Chart";
 import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
-import WidgetSm from "../../components/widgetSm/WidgetSm";
-import WidgetLg from "../../components/widgetLg/WidgetLg";
 import { useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { userRequest } from "../../requestMethods";
-import { Divider } from "@mui/material";
-import "./newProduct.css"; // Import CSS file for styling
+import "./newProduct.css";
 
 export default function NewProduct() {
   const [open, setOpen] = useState(false);
@@ -175,20 +172,16 @@ export default function NewProduct() {
                 fullWidth
               />
             </div>
+
             <div className="addProductItem">
-              <InputLabel id="categories-label">Categories</InputLabel>
-              <Select
-                labelId="categories-label"
-                id="categories"
-                multiple
-                value={cat}
-                onChange={handlecat}
+              <label>Categories</label>
+              <TextField
+                name="categories"
+                type="text"
+                placeholder="Categories"
+                onChange={handleChange}
                 fullWidth
-              >
-                <MenuItem value="Man">Man</MenuItem>
-                <MenuItem value="Jeans">Jeans</MenuItem>
-                {/* Add more categories as needed */}
-              </Select>
+              />
             </div>
             <div className="addProductItem">
               <label>Price</label>

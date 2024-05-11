@@ -29,6 +29,8 @@ router.post("/", authenticateTokenAdmin, async (req, res) => {
 // PUT /api/products/:id
 router.put("/:id", authenticateAdmin, async (req, res) => {
   const { id } = req.params;
+  console.log("id from frontend =>", id);
+  console.log("data from frontend =>", req.body);
   Product.findByIdAndUpdate(id, req.body, { new: true })
 
     .then((product) => {
