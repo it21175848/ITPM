@@ -15,6 +15,7 @@ import Newsletter from "./components/Newsletter";
 import Announcement from "./components/Announcement";
 import ParkingLot from "./pages/Parking/parking";
 import ParkingForm from "./pages/Parking/parkingForm";
+import ClientManagementSystem from "./pages/intern/ClientManagementSystem";
 
 import CustomerSupportPage from "./pages/SupportService/customerSupportPage";
 import TicketList from "./pages/SupportService/TicketList";
@@ -35,6 +36,7 @@ const App = () => {
       <Route path="/shops" element={<ShopPage />} />
       <Route path="/shops/:id" element={<Shop />} />
       <Route path="/parking" element={<ParkingLot />} />
+      <Route path="/clientManagment" element={<ClientManagementSystem />} />
       <Route path="/parking-form/:slotId" element={<ParkingForm />} />
       <Route path="/customerSupport" element={<CustomerSupportPage />} />
       <Route path="/TicketList" element={<TicketList />} />

@@ -3,7 +3,7 @@ import "./createShop.css";
 import { useState, useEffect } from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebase";
-import { createShop, getOwners } from "../../redux/apiCalls"; 
+import { createShop, getOwners } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -23,32 +23,32 @@ export default function CreateShop() {
   const history = useHistory();
 
   const handleCategoryChange = (e) => {
-  setCategory(e.target.value);
-};
+    setCategory(e.target.value);
+  };
 
-const handleFloorLevelChange = (e) => {
-  setFloorLevel(e.target.value);
-};
+  const handleFloorLevelChange = (e) => {
+    setFloorLevel(e.target.value);
+  };
 
-const handleShopNumberChange = (e) => {
-  setShopNumber(e.target.value);
-};
+  const handleShopNumberChange = (e) => {
+    setShopNumber(e.target.value);
+  };
 
-const handleOpeningTimeChange = (e) => {
-  setOpeningTime(e.target.value);
-};
+  const handleOpeningTimeChange = (e) => {
+    setOpeningTime(e.target.value);
+  };
 
-const handleClosingTimeChange = (e) => {
-  setClosingTime(e.target.value);
-};
+  const handleClosingTimeChange = (e) => {
+    setClosingTime(e.target.value);
+  };
 
-const handleOwnerChange = (e) => {
-  setSelectedOwner(e.target.value);
-};
+  const handleOwnerChange = (e) => {
+    setSelectedOwner(e.target.value);
+  };
 
-const handleShopPhoneNumberChange = (e) => {
-  setShopPhoneNumber(e.target.value);
-};
+  const handleShopPhoneNumberChange = (e) => {
+    setShopPhoneNumber(e.target.value);
+  };
 
 
   useEffect(() => {
@@ -90,7 +90,7 @@ const handleShopPhoneNumberChange = (e) => {
 
     uploadTask.on(
       "state_changed",
-      (snapshot) => {},
+      (snapshot) => { },
       (error) => {
         console.log(error);
         setLoading(false);
