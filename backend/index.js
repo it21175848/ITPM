@@ -23,4 +23,11 @@ app.post("/authenticate", async (req, res) => {
   }
 });
 
-app.listen(3001);
+const PORT = 3001;
+app.listen(PORT, (err) => {
+  if (err) {
+    console.error(`Failed to start the server: ${err.message}`);
+  } else {
+    console.log(`Server is running successfully on http://localhost:${PORT}`);
+  }
+});

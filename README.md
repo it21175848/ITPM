@@ -14,6 +14,6 @@ Currently, two official plugins are available:
 
 3. cd to frontend - npm install
 
-4. to run frontend-npm run dev
+4. to run frontend- npm run dev
 
-5. to run Back end-npm start
+5. to run Back end- npm start
