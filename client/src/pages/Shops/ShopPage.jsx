@@ -10,7 +10,6 @@ import "./shopPage.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 
-
 const ShopPage = () => {
   const [shops, setShops] = useState([]);
   const [filteredShops, setFilteredShops] = useState([]);

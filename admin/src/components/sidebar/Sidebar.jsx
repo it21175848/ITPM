@@ -17,6 +17,7 @@ import {
   Report,
 } from "@material-ui/icons";
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
@@ -86,16 +87,11 @@ export default function Sidebar() {
             </Link>
             <Link to="/customerSupportList" className="link">
               <li className="sidebarListItem">
-                <DirectionsCarIcon className="sidebarIcon" />
+                <SupportAgentIcon className="sidebarIcon" />
                 Customer Support
               </li>
             </Link>
-            <Link to="/shoplist" className="link">
-              <li className="sidebarListItem">
-                <MapOutlined className="sidebarIcon" />
-                Mall Maps
-              </li>
-            </Link>
+
             <Link to="/products" className="link">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
@@ -133,10 +129,7 @@ export default function Sidebar() {
               <WorkOutline className="sidebarIcon" />
               Manage
             </li>
-            <li className="sidebarListItem">
-              <Timeline className="sidebarIcon" />
-              Analytics
-            </li>
+
             <li className="sidebarListItem">
               <Report className="sidebarIcon" />
               Reports
